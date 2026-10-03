@@ -6,11 +6,10 @@ API to display data about current weather conditions. Developed as part of [TOP]
 - Dashboard showing current weather condition based on
   - user desired city
   - user location on permission
-
-- Interactive form for entering user location
 - Forecast for:
   - The day
   - The week
+- Interactive form for entering user location
 
 ## Objectives
 - To practice integrating API services
