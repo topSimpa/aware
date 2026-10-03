@@ -1,39 +1,33 @@
-# <Project Name>
-<description goes here>
+# Aware
+Aware is a weather condition web dashboard that uses the [visual-crossing](https://www.visualcrossing.com/weather-api)
+API to display data about current weather conditions. Developed as part of [https://www.theodinproject.com/](TOP) projectS.
 
+## Features / Requirement
+- Dashboard showing current weather condition based on
+  - user desired city
+  - user location on permission
 
-## Features
+- Interactive form for entering user location
+- Forecast for:
+  - The day
+  - The week
 
-
-
-
-## Objectives(optional)
-
-
+## Objectives
+- To practice integrating API services
+- To practice using external API services
+- To pactice customized form validations
+- To demonstrate skill in developing beautiful website
 
 ## Technology Used
 - Vanilla JS
 - CSS
 - HTML5
 - Webpack, loaders and plugins
-
-<!-- SETUP:START -->
-## ⚠️ First-time setup
-
-This is a fresh clone from the template. Before writing any code, run:
-
-```sh
-    npm init -y
-```
-
-```sh
-    npm run setup
-```
-
-This installs the latest webpack tooling and locks versions. **Do this once, immediately, then delete this section (it removes itself automatically).**
-<!-- SETUP:END -->
+- Linting: Eslint
+- Formatter: prettier
 
 ## Getting Started
+Follow the Instructions below to get started
 
 ### Prerequisites
 1. git
@@ -60,5 +54,6 @@ This installs the latest webpack tooling and locks versions. **Do this once, imm
 
 4. Check `package.json` for other available commands.
 
-### Credits & Contributions
-- Myself
+## Credits & Contributions
+- [Myself](https://github.com/topSimpa)
+-# this project is built for PC/desktop
