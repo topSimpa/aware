@@ -1,6 +1,6 @@
 # Aware
 Aware is a weather condition web dashboard that uses the [visual-crossing](https://www.visualcrossing.com/weather-api)
-API to display data about current weather conditions. Developed as part of [https://www.theodinproject.com/](TOP) projectS.
+API to display data about current weather conditions. Developed as part of [https://www.theodinproject.com](TOP) projectS.
 
 ## Features / Requirement
 - Dashboard showing current weather condition based on
@@ -37,7 +37,7 @@ Follow the Instructions below to get started
 1. Clone this repository:
 
    ```sh
-   git clone <repo_url>
+   git clone https://github.com/topSimpa/aware.git
    cd commit
    ```
 
@@ -56,4 +56,4 @@ Follow the Instructions below to get started
 
 ## Credits & Contributions
 - [Myself](https://github.com/topSimpa)
--# this project is built for PC/desktop
+> this project was developed for desktop
