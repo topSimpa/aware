@@ -1,9 +1,12 @@
+import "./reset.css";
+import "./styles.css";
+
 // function success(position) {
 //             console.log(position.coords.latitude,
 //                 position.coords.longitude
 //             );
-        
-// }        
+
+// }
 // navigator.geolocation.getCurrentPosition(success);
 
 // async function getLocation() {

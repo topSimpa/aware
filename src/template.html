@@ -1,12 +1,34 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="./images/favicon.ico" type="image/x-icon" />
     <title>Aware</title>
-</head>
-<body>
-
-</body>
+  </head>
+  <body>
+    <header>
+      <section class="brand-content">
+        <img id="logo" src="./images/logo.svg" alt="logo" />
+        <h1>Aware</h1>
+      </section>
+      <section class="search-content">
+        <form id="location-form">
+          <input placeholder="Enter a city" />
+          <button id="submit" type="submit">Get Weather</button>
+        </form>
+      </section>
+      <section class="location-content">
+        <button id="user-location">Use location</button>
+      </section>
+    </header>
+    <main>
+      <section class="today-content">
+        <div class="current-conditions"></div>
+        <div class="air-conditions"></div>
+        <div class="forecast-today"></div>
+      </section>
+      <section class="week-content"></section>
+    </main>
+  </body>
 </html>
