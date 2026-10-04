@@ -7,28 +7,52 @@
     <title>Aware</title>
   </head>
   <body>
+    <!-- <div class="leftcontent"> -->
     <header>
       <section class="brand-content">
         <img id="logo" src="./images/logo.svg" alt="logo" />
         <h1>Aware</h1>
       </section>
       <section class="search-content">
-        <form id="location-form">
+        <form id="location-form" novalidate>
           <input placeholder="Enter a city" />
           <button id="submit" type="submit">Get Weather</button>
         </form>
       </section>
-      <section class="location-content">
-        <button id="user-location">Use location</button>
-      </section>
+      <button id="user-location">
+        <img src="./images/location.svg" alt="icon" />
+        Use location
+      </button>
     </header>
     <main>
-      <section class="today-content">
-        <div class="current-conditions"></div>
-        <div class="air-conditions"></div>
-        <div class="forecast-today"></div>
+      <section class="todays-content">
+        <div class="cards current-conditions">
+          <h2>City</h2>
+        </div>
+        <div class="cards air-conditions">
+          <h5>AIR CONDITIONS</h5>
+        </div>
+        <div class="cards forecast-today">
+          <h5>TODAY'S FORECAST</h5>
+        </div>
       </section>
-      <section class="week-content"></section>
+      <section class="cards week-content">
+        <div class="forecast-week">
+          <h5>7-DAY FORECAST</h5>
+        </div>
+        <ul class="contact">
+          <li class="github">
+            <a>
+              <img src="./images/github.svg" alt="github" />
+            </a>
+          </li>
+          <li class="linkedin">
+            <a>
+              <img src="./images/linkedin.svg" alt="linkedin" />
+            </a>
+          </li>
+        </ul>
+      </section>
     </main>
   </body>
 </html>

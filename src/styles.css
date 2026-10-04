@@ -1,0 +1,142 @@
+:root {
+    --main-background: #EAF0EE;
+    --secondary-background: #ebf3f3;
+    --accent: #F07624;
+    --secondary-accent: #302925;
+    --font-color: #0D0501;
+    font-size: 16px;
+}
+
+body {
+    color: var(--font-color);
+    background-color: var(--main-background);
+    padding: 1rem 3rem 2rem 3rem;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 2rem;
+    min-height: 100vh;
+    font-family: "Comfortaa";
+}
+
+header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+header section.brand-content {
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
+}
+
+header button {
+    padding: 0.5rem 1rem;
+    background-color: #F07624;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    min-width: 10rem;
+}
+
+section.brand-content img#logo {
+    height: 2rem;
+}
+
+header section.search-content {
+    flex: 1;
+    max-width: 50rem;
+}
+
+section.search-content form#location-form {
+    padding-left: 0.5rem;
+    display: flex;
+    gap: 1rem;
+}
+
+form#location-form input {
+    flex: 1;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+}
+
+header button#user-location {
+    display: flex;
+    gap: 0.5rem;
+    background-color: var(--secondary-accent);
+    color: var(--main-background);
+    margin-left: 2rem;
+}
+
+button#user-location img{
+    background-color: var(--main-background);
+    border-radius: 50%;
+}
+
+main {
+    padding: 0.5rem;
+    /* border: 1px solid var(--accent); */
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 4rem;
+}
+
+main section.todays-content {
+    display: grid;
+    grid-template-rows: 3fr 2fr 2fr;
+    gap: 1.5rem;
+}
+
+.cards {
+    padding: 1rem;
+    /* border: 1px solid var(--accent); */
+    box-shadow: 0 0 0.25rem 0;
+    border-radius: 0.5rem;
+    background-color: var(--secondary-background);
+}
+
+section.todays-content div.current-conditions {
+    box-shadow: none;
+    border: 1px solid var(--accent);
+}
+
+main section.week-content {
+    display: grid;
+    grid-template-rows: 1fr auto;
+}
+
+section.week-content ul.contact {
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+ul.contact > li {
+    padding: 0.25rem;
+    background-color: var(--accent);
+    border-radius: 50%;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-family: "Metamorphous";
+}
+
+@font-face {
+    font-family: 'Comfortaa';
+    src: url('./fonts/Comfortaa-Regular.woff') format('woff2'),
+        url('./fonts/Comfortaa-Regular.woff2') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Metamorphous';
+    src: url('./fonts/Metamorphous.woff2') format('woff2'),
+        url('./fonts/Metamorphous.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
