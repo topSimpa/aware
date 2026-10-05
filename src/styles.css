@@ -216,6 +216,7 @@ div.forecast-week ul.days {
 ul.days li.day-summary {
     flex: 1;
     display: flex;
+    padding: 1rem;
     justify-content: space-between;
     align-items: center;
     font-size: 0.9rem;
