@@ -27,10 +27,55 @@
     <main>
       <section class="todays-content">
         <div class="cards current-conditions">
-          <h2>City</h2>
+          <div class="content">
+            <div class="left">
+              <div class="top">
+                <h2>City</h2>
+                <span id="todays-date">Thursday, October 05, 2026</span>
+              </div>
+              <div class="bottom">
+                <span id="temp">30</span><span id="unit">&#8451;</span>
+              </div>
+            </div>
+            <img src="./images/clear-day.svg" alt="sunny" />
+          </div>
         </div>
         <div class="cards air-conditions">
           <h5>AIR CONDITIONS</h5>
+          <div class="elements">
+            <ul class="element-list">
+              <li id="windspeed">
+                <img src="./images/wind.svg" alt="logo-wind" />
+                <div>
+                  <p class="element-name">Wind</p>
+                  <p class="element-value">123</p>
+                </div>
+              </li>
+              <li id="feels-like">
+                <img src="./images/feels.svg" alt="logo-feels" />
+                <div>
+                  <p class="element-name">Feels like</p>
+                  <p class="element-value"></p>
+                </div>
+              </li>
+            </ul>
+            <ul class="element-list">
+              <li id="pressure">
+                <img src="./images/pressure.svg" alt="logo-pressure" />
+                <div>
+                  <p class="element-name">Pressure</p>
+                  <p class="element-value"></p>
+                </div>
+              </li>
+              <li id="uv-index">
+                <img src="./images/uv.svg" alt="" />
+                <div>
+                  <p class="element-name">UV index</p>
+                  <p class="element-value"></p>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
         <div class="cards forecast-today">
           <h5>TODAY'S FORECAST</h5>

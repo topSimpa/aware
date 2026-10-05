@@ -1,6 +1,11 @@
 // module that fetches weather info from
 // Visual crossing using city name and location
 
+const err = {
+  notFound: "City not found check for Error and try again",
+  other: "Error occurred please try again",
+};
+
 const url = {
   API_KEY: "XT5ZRN75JNPP4MG624DSUWUJC",
   base: "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/",
@@ -9,41 +14,45 @@ const url = {
 };
 
 function getWeather() {
-  //happy path working well
-  //sad path needs more knowledge
-  //also async await function calling
-  //return only needed data for display
-  const makeFetch = async (endpoint) => {
-    const query = `${url.base}${endpoint}${url.parameters}&key=${url.API_KEY}`;
-
-    const response = await fetch(query);
-    const locationData = await response.json();
-    console.log(locationData);
-    //extract app specific data for now and today
+  const extractAppData = (data) => {
     const appData = {};
+
+    //extract app specific data for now and today
     appData.today = {
       summary: {
-        time: locationData.currentConditions.datetime,
-        temperature: locationData.currentConditions.temp,
-        icon: locationData.currentConditions.icon,
+        time: data.currentConditions.datetime,
+        temperature: data.currentConditions.temp,
+        icon: data.currentConditions.icon,
       },
       airCondition: {
-        windspeed: locationData.currentConditions.windspeed,
-        feelsLike: locationData.currentConditions.feelslike,
-        pressure: locationData.currentConditions.pressure,
-        uv: locationData.currentConditions.uvindex,
+        windspeed: data.currentConditions.windspeed,
+        feelsLike: data.currentConditions.feelslike,
+        pressure: data.currentConditions.pressure,
+        uv: data.currentConditions.uvindex,
       },
       forecast: {
-        morning: locationData.days[0].hours[6].icon,
-        afternoon: locationData.days[0].hours[13].icon,
-        evening: locationData.days[0].hours[18].icon,
-        night: locationData.days[0].hours[21].icon,
+        morning: {
+          icon: data.days[0].hours[6].icon,
+          temperature: data.days[0].hours[6].temp,
+        },
+        afternoon: {
+          icon: data.days[0].hours[13].icon,
+          temperature: data.days[0].hours[6].temp,
+        },
+        evening: {
+          icon: data.days[0].hours[18].icon,
+          temperature: data.days[0].hours[6].temp,
+        },
+        night: {
+          icon: data.days[0].hours[21].icon,
+          temperature: data.days[0].hours[6].temp,
+        },
       },
     };
 
     //extract forecast for the week
     appData.week = [];
-    locationData.days.forEach((days) => {
+    data.days.forEach((days) => {
       const daySummary = {
         datetime: days.datetime,
         icon: days.icon,
@@ -54,13 +63,34 @@ function getWeather() {
     return appData;
   };
 
+  const makeFetch = async (endpoint) => {
+    const query = `${url.base}${endpoint}${url.parameters}&key=${url.API_KEY}`;
+
+    const response = await fetch(query);
+
+    if (response.ok) {
+      const locationData = await response.json();
+      console.log(locationData);
+
+      //getappData
+      const appData = extractAppData(locationData);
+      return Promise.resolve(appData);
+    } else {
+      if (response.status === "404") {
+        return Promise.reject(err.notFound);
+      } else {
+        return Promise.reject(err.other);
+      }
+    }
+  };
+
   const byLocation = (location) => {
     const locationString = `${location.latitude}%2C${location.longitude}`;
     makeFetch(locationString).then(console.log);
   };
 
   const byCity = (city) => {
-    return makeFetch(city);
+    return makeFetch(city).then(console.log);
   };
 
   return {
@@ -71,12 +101,3 @@ function getWeather() {
 
 const getWeatherData = getWeather();
 export default getWeatherData;
-
-// async function getLocation() {
-//     const url =
-//     const response = await fetch(`${url}&key=${key}`);
-//     const locationData = await response.json();
-//     console.log(locationData);
-// }
-
-// getLocation().catch((error) => console.log(error));
