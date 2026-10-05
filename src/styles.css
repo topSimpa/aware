@@ -54,8 +54,12 @@ section.search-content form#location-form {
     gap: 1rem;
 }
 
-form#location-form input {
+form#location-form .inputbox {
     flex: 1;
+}
+
+form#location-form input {
+    width: 100%;
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
     font-size: 0.9rem;
@@ -82,12 +86,6 @@ main {
     gap: 4rem;
 }
 
-main section.todays-content {
-    display: grid;
-    grid-template-rows: 3fr 2fr 2fr;
-    gap: 1.5rem;
-}
-
 .cards {
     padding: 1rem;
     /* border: 1px solid var(--accent); */
@@ -96,16 +94,34 @@ main section.todays-content {
     background-color: var(--secondary-background);
 }
 
+.two-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+main section.todays-content {
+    display: grid;
+    grid-template-rows: 3fr 2fr 2fr;
+    gap: 1.5rem;
+}
+
+
 section.todays-content div.current-conditions {
     box-shadow: none;
     border: 1px solid var(--accent);
+    background-image: url(./images/light-background.jpg);
+    background-position: center;
 }
 
 div.current-conditions div.content {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px) saturate(160%);
     display: flex;
     height: 100%;
     justify-content: space-between;
     align-items: center;
+    paddIng: 0.5rem;
 }
 
 div.content div.left {
@@ -124,10 +140,15 @@ div.left div.bottom {
     font-weight: 600;
 }
 
+div.content img#weather-icon {
+    width: 8rem;
+}
+
+div.content span#summary {
+    font-weight: 600;
+}
+
 section.todays-content div.air-conditions {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
     padding-right: 3rem;
 }
 
@@ -155,9 +176,58 @@ ul.element-list .element-value {
     font-weight: 600;
 }
 
+div.forecast-today ul.today{
+    flex: 1;
+    display: flex;
+}
+
+ul.today li {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+li.time + li.time {
+    border-left: 1px solid var(--secondary-accent);
+}
+
+li.time img{
+    width: 2rem;
+}
+
+li.time .temp {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
 main section.week-content {
     display: grid;
     grid-template-rows: 1fr auto;
+}
+
+div.forecast-week ul.days {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+ul.days li.day-summary {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+}
+
+li.day-summary + li.day-summary {
+    border-top: 1px solid var(--secondary-accent);
+}
+
+li.day-summary .condition {
+    font-weight: 600;
+    font-size: 1rem;
 }
 
 section.week-content ul.contact {

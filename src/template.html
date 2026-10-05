@@ -15,7 +15,10 @@
       </section>
       <section class="search-content">
         <form id="location-form" novalidate>
-          <input placeholder="Enter a city" />
+          <div class="inputbox">
+            <input placeholder="Enter a city" />
+            <span id="form-error"></span>
+          </div>
           <button id="submit" type="submit">Get Weather</button>
         </form>
       </section>
@@ -31,16 +34,21 @@
             <div class="left">
               <div class="top">
                 <h2>City</h2>
-                <span id="todays-date">Thursday, October 05, 2026</span>
+                <span class="caption" id="todays-date"
+                  >Thursday, October 05, 2026</span
+                >
               </div>
               <div class="bottom">
                 <span id="temp">30</span><span id="unit">&#8451;</span>
               </div>
             </div>
-            <img src="./images/clear-day.svg" alt="sunny" />
+            <div class="right">
+              <span class="caption" id="summary">Rainy</span>
+              <img id="weather-icon" src="./images/rain.svg" alt="sunny" />
+            </div>
           </div>
         </div>
-        <div class="cards air-conditions">
+        <div class="cards two-column air-conditions">
           <h5>AIR CONDITIONS</h5>
           <div class="elements">
             <ul class="element-list">
@@ -77,13 +85,67 @@
             </ul>
           </div>
         </div>
-        <div class="cards forecast-today">
+        <div class="cards two-column forecast-today">
           <h5>TODAY'S FORECAST</h5>
+          <ul class="today">
+            <li class="time" id="morning">
+              <p>Morning</p>
+              <img src="./images/cloud.svg" />
+              <p class="temp">20</p>
+            </li>
+            <li class="time" id="afternoon">
+              <p>Afternoon</p>
+              <img src="./images/cloud.svg" />
+              <p class="temp">10</p>
+            </li>
+            <li class="time" id="night">
+              <p>Evening</p>
+              <img src="./images/cloud.svg" />
+              <p class="temp">30</p>
+            </li>
+          </ul>
         </div>
       </section>
       <section class="cards week-content">
-        <div class="forecast-week">
+        <div class="two-column forecast-week">
           <h5>7-DAY FORECAST</h5>
+          <ul class="days">
+            <li class="day-summary">
+              <p class="day"></p>
+              <p class="condition"></p>
+              <p class="date"></p>
+            </li>
+            <li class="day-summary">
+              <p class="day"></p>
+              <p class="condition"></p>
+              <p class="date"></p>
+            </li>
+            <li class="day-summary">
+              <p class="day"></p>
+              <p class="condition"></p>
+              <p class="date"></p>
+            </li>
+            <li class="day-summary">
+              <p class="day"></p>
+              <p class="condition"></p>
+              <p class="date"></p>
+            </li>
+            <li class="day-summary">
+              <p class="day">Fri</p>
+              <p class="condition"><img />Sunny</p>
+              <p class="date">9/08/26</p>
+            </li>
+            <li class="day-summary">
+              <p class="day"></p>
+              <p class="condition"></p>
+              <p class="date"></p>
+            </li>
+            <li class="day-summary">
+              <p class="day"></p>
+              <p class="condition"></p>
+              <p class="date"></p>
+            </li>
+          </ul>
         </div>
         <ul class="contact">
           <li class="github">
