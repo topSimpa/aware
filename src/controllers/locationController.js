@@ -1,7 +1,8 @@
+// locationConjtroller.js:
 // location controller helps to access info on
-// Users location
+// Users location using geolocator and
 
-export default function getLocation() {
+function getLocation() {
   return new Promise((resolve, reject) => {
     const success = (position) => {
       resolve({
@@ -17,3 +18,18 @@ export default function getLocation() {
     navigator.geolocation.getCurrentPosition(success, failure);
   });
 }
+
+async function getCity(location) {
+  const url = "https://nominatim.openstreetmap.org/reverse?&format=json";
+  const response = await fetch(
+    `${url}&lat=${location.latitude}&lon=${location.longitude}`,
+  );
+  if (response.ok) {
+    const place = await response.json();
+    return Promise.resolve(place.address.city);
+  } else {
+    return Promise.reject("Error occurred please try again");
+  }
+}
+
+export { getLocation, getCity };

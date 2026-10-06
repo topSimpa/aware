@@ -1,5 +1,7 @@
+// weatherController.js:
 // module that fetches weather info from
-// Visual crossing using city name and location
+// Visual crossing using city name or location
+// handles how weather data is represented
 
 const err = {
   notFound: "City not found check for Error and try again",
@@ -41,10 +43,6 @@ function getWeather() {
         },
         evening: {
           icon: data.days[0].hours[18].icon,
-          temperature: data.days[0].hours[6].temp,
-        },
-        night: {
-          icon: data.days[0].hours[21].icon,
           temperature: data.days[0].hours[6].temp,
         },
       },
@@ -99,5 +97,33 @@ function getWeather() {
   };
 }
 
+function tempConverter() {
+  const roundToOneDecimal = (val) => {
+    const result = Math.round(val * 10) / 10;
+
+    return result;
+  };
+
+  const toFarenheit = (temp) => {
+    const farenheit = temp * (9 / 5) + 32;
+    const result = roundToOneDecimal(farenheit);
+
+    return result;
+  };
+
+  const toCelcius = (temp) => {
+    const celcius = (temp - 32) * (5 / 9);
+    const result = roundToOneDecimal(celcius);
+
+    return result;
+  };
+  return {
+    toCelcius,
+    toFarenheit,
+  };
+}
+
 const getWeatherData = getWeather();
-export default getWeatherData;
+const temperatureConverter = tempConverter();
+
+export { getWeatherData, temperatureConverter };

@@ -7,16 +7,16 @@
     <title>Aware</title>
   </head>
   <body>
-    <!-- <div class="leftcontent"> -->
+    <dialog class="loading-component"></dialog>
     <header>
       <section class="brand-content">
         <img id="logo" src="./images/logo.svg" alt="logo" />
         <h1>Aware</h1>
       </section>
       <section class="search-content">
-        <form id="location-form" novalidate>
+        <form id="city-form" novalidate>
           <div class="inputbox">
-            <input placeholder="Enter a city" />
+            <input name="city" placeholder="Enter a city" required />
             <span id="form-error"></span>
           </div>
           <button id="submit" type="submit">Get Weather</button>
@@ -33,7 +33,7 @@
           <div class="content">
             <div class="left">
               <div class="top">
-                <h2>City</h2>
+                <h2 id="city">City</h2>
                 <span class="caption" id="todays-date"
                   >Thursday, October 05, 2026</span
                 >
@@ -90,17 +90,17 @@
           <ul class="today">
             <li class="time" id="morning">
               <p>Morning</p>
-              <img src="./images/cloud.svg" />
+              <img class="icon" src="./images/cloud.svg" />
               <p class="temp">20</p>
             </li>
             <li class="time" id="afternoon">
               <p>Afternoon</p>
-              <img src="./images/cloud.svg" />
+              <img class="icon" src="./images/cloud.svg" />
               <p class="temp">10</p>
             </li>
-            <li class="time" id="night">
+            <li class="time" id="evening">
               <p>Evening</p>
-              <img src="./images/cloud.svg" />
+              <img class="icon" src="./images/cloud.svg" />
               <p class="temp">30</p>
             </li>
           </ul>

@@ -1,9 +1,10 @@
 :root {
+    --accent: #F07624;
+    --font-color: #0D0501;
+    --invalid: #F02B24;
     --main-background: #EAF0EE;
     --secondary-background: #ebf3f3;
-    --accent: #F07624;
     --secondary-accent: #302925;
-    --font-color: #0D0501;
     font-size: 16px;
 }
 
@@ -17,6 +18,22 @@ body {
     min-height: 100vh;
     font-family: "Comfortaa";
 }
+
+dialog[open] {
+  display: flex;
+  align-items: center;
+  padding: 3rem;
+  height: 20vh;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  border: 2px solid var(--accent);
+}
+
+dialog[open]::backdrop {
+    background-color: hsl(0 0% 0% / 0.5);
+    backdrop-filter: blur(2px);
+}
+
 
 header {
     display: flex;
@@ -32,7 +49,7 @@ header section.brand-content {
 
 header button {
     padding: 0.5rem 1rem;
-    background-color: #F07624;
+    background-color: var(--accent);
     border-radius: 0.5rem;
     font-size: 0.9rem;
     font-weight: 600;
@@ -48,21 +65,34 @@ header section.search-content {
     max-width: 50rem;
 }
 
-section.search-content form#location-form {
+section.search-content form#city-form {
     padding-left: 0.5rem;
     display: flex;
     gap: 1rem;
 }
 
-form#location-form .inputbox {
+form#city-form .inputbox {
     flex: 1;
+    position: relative;
 }
 
-form#location-form input {
+form#city-form #form-error {
+    color: var(--invalid) ;
+    position: absolute;
+    left: 0.5rem;
+    bottom: -1.5rem;
+    font-weight: 600;
+}
+
+form#city-form input {
     width: 100%;
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
     font-size: 0.9rem;
+}
+
+form#city-form input:user-invalid {
+    outline: 1px solid var(--invalid);
 }
 
 header button#user-location {
