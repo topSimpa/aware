@@ -140,7 +140,7 @@ main section.todays-content {
 section.todays-content div.current-conditions {
     box-shadow: none;
     border: 1px solid var(--accent);
-    background-image: url(./images/light-background.jpg);
+    background-image: url(./images/ui/light-background.jpg);
     background-position: center;
 }
 
