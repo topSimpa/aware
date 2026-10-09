@@ -1,6 +1,6 @@
 // locationConjtroller.js:
 // location controller helps to access info on
-// Users location using geolocator and
+// Users location using geolocator and nominatim
 
 function getLocation() {
   return new Promise((resolve, reject) => {

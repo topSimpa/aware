@@ -1,10 +1,11 @@
 //ui module for the currentCondition summary
 // Card
+import { format } from "date-fns";
 
 import {
   resolveCondition,
   resolveWeatherIcon,
-  assignTempUnit,
+  assignTemp,
   defaultValue,
 } from "./common.js";
 
@@ -31,22 +32,25 @@ export default function renderSummaryCard({
   // topLeft part of the Summary UI
   summaryTopLeft.classList.add("summary-top-left");
   // cityName
-  city.dataset.city = "city-name";
+  city.classList.add("city-name");
   city.textContent = name || defaultValue;
   // todaysDate
-  today.dataset.date = "todays-date";
-  today.textContent = new Date(); //todo: convert to format use date-fns
-
+  today.classList.add("todays-date");
+  today.textContent = format(new Date(), "EEEE, LLLL dd, yyy");
   summaryTopLeft.append(city, today);
 
   //bottomLeft part of the SummaryUI
   summaryBottomLeft.classList.add("summary-bottom-left");
   //temperature
-  temp.dataset.temp = "current-temp";
-  temp.textContent = temperature || defaultValue;
+  temp.classList.add("current-temp");
   //unit
-  tempUnit.dataset.tempUnit = "temp-unit";
-  assignTempUnit(unit, tempUnit);
+  tempUnit.classList.add("current-temp-unit");
+  assignTemp({
+    tempElement: temp,
+    value: temperature,
+    unitElement: tempUnit,
+    unit,
+  });
 
   summaryBottomLeft.append(temp, tempUnit);
 
@@ -55,9 +59,9 @@ export default function renderSummaryCard({
   //right part of the summaryUI
   summaryRight.classList.add("summary-right");
   //condition
-  cond.dataset.condition = "current-condition";
+  cond.classList.add("current-condition");
   //weather-icon
-  weatherIcon.dataset.icon = "weather-icon";
+  weatherIcon.classList.add("weather-icon");
   resolveCondition(condition, cond);
   resolveWeatherIcon(condition, weatherIcon);
   //append to right
@@ -69,3 +73,6 @@ export default function renderSummaryCard({
 
   return summaryContent;
 }
+
+//!remember to change dataset to clasees since they arent storing values
+//!just naming for all of their type

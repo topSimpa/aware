@@ -37,8 +37,7 @@ export default function getWeather(unit) {
   }
 
   const makeFetch = async (endpoint) => {
-    const query = `${url.base}${endpoint}${url.parameters}\
-    &unitGroup=${selectedUnit}&key=${url.API_KEY}`;
+    const query = `${url.base}${endpoint}${url.parameters}&unitGroup=${selectedUnit}&key=${url.API_KEY}`;
 
     const response = await fetch(query);
 
@@ -47,7 +46,7 @@ export default function getWeather(unit) {
       console.log(locationData);
 
       //getappData
-      const appData = normalizeWeather;
+      const appData = normalizeWeather(locationData);
 
       return Promise.resolve(appData);
     } else {
@@ -59,13 +58,23 @@ export default function getWeather(unit) {
     }
   };
 
-  const byLocation = (location) => {
-    const locationString = `${location.latitude}%2C${location.longitude}`;
-    makeFetch(locationString).then(console.log);
+  const byLocation = async (location) => {
+    try {
+      const locationString = `${location.latitude}%2C${location.longitude}`;
+      const appData = await makeFetch(locationString);
+      return Promise.resolve(appData);
+    } catch (error) {
+      return Promise.reject(error);
+    }
   };
 
-  const byCity = (city) => {
-    return makeFetch(city).then(console.log);
+  const byCity = async (city) => {
+    try {
+      const appData = makeFetch(city);
+      Promise.resolve(appData);
+    } catch (error) {
+      return Promise.reject(error);
+    }
   };
 
   return {

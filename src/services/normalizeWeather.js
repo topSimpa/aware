@@ -25,9 +25,11 @@ const API_APP_CONDITION_MAP = {
 
 function matchConditions(condition) {
   for (const [key, val] of Object.entries(API_APP_CONDITION_MAP)) {
-    if (condition == val) return APP_CONDITIONS_IDS[key];
-    else return null;
+    if (condition === val) {
+      return APP_CONDITIONS_IDS[key];
+    }
   }
+  return null;
 }
 
 export default function normalizeWeather(raw) {
@@ -40,7 +42,7 @@ export default function normalizeWeather(raw) {
   const appData = {
     current: {
       summary: {
-        temperature: cur.datetime,
+        temperature: cur.temp,
         condition: matchConditions(cur.icon),
       },
       airCondition: {
@@ -58,7 +60,7 @@ export default function normalizeWeather(raw) {
         const hour = pickHour(time);
         const details = {
           temperature: hour.temp,
-          condition: matchConditions(cur.icon),
+          condition: matchConditions(hour.icon),
         };
 
         return [label, details];
@@ -68,7 +70,7 @@ export default function normalizeWeather(raw) {
     week: week.map((day) => {
       return {
         date: day.datetime,
-        condition: matchConditions(cur.icon),
+        condition: matchConditions(day.icon),
       };
     }),
   };
