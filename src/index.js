@@ -6,7 +6,7 @@ import { getLocation, getCity } from "./services/locationController.js";
 import getWeather from "./services/weatherController";
 import { APP_UNIT_IDS } from "./config/constants.js";
 import renderSummaryCard from "./components/currentSummaryCard.js";
-import renderAirConditon from "./components/airConditionComponent.js";
+import renderAirConditon from "./components/airConditionCard.js";
 import renderTodayForecast from "./components/todaysForecastCard.js";
 import renderWeekForecast from "./components/weekForecastCard.js";
 
