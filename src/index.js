@@ -6,6 +6,9 @@ import { getLocation, getCity } from "./services/locationController.js";
 import getWeather from "./services/weatherController";
 import { APP_UNIT_IDS } from "./config/constants.js";
 import renderSummaryCard from "./components/currentSummaryCard.js";
+import renderAirConditon from "./components/airConditionComponent.js";
+import renderTodayForecast from "./components/todaysForecastCard.js";
+import renderWeekForecast from "./components/weekForecastCard.js";
 
 const getWeatherData = getWeather(APP_UNIT_IDS.celcius);
 async function loadLocationData(location) {
@@ -16,7 +19,16 @@ async function loadLocationData(location) {
 
     weatherData.current.summary.name = city;
     const summaryCard = renderSummaryCard(weatherData.current.summary);
+    const airConditionCard = renderAirConditon(
+      weatherData.current.airCondition,
+    );
+    const todaysForecastCard = renderTodayForecast(weatherData.today);
+    const weekForecastCard = renderWeekForecast(weatherData.week);
+
     console.log(summaryCard);
+    console.log(airConditionCard);
+    console.log(todaysForecastCard);
+    console.log(weekForecastCard);
   } catch (error) {
     console.log(error);
   }

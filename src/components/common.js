@@ -96,10 +96,11 @@ const resolveCondition = (condition, element) => {
     case APP_CONDITIONS_IDS.windy:
       element.textContent = CONDITION_LABELS.windy;
       break;
-    case APP_CONDITIONS_IDS.cloudy ||
-      APP_CONDITIONS_IDS.partlyCloudyDay ||
-      APP_CONDITIONS_IDS.partlyCloudyNight:
+    case APP_CONDITIONS_IDS.cloudy:
+    case APP_CONDITIONS_IDS.partlyCloudyDay:
+    case APP_CONDITIONS_IDS.partlyCloudyNight:
       element.textContent = CONDITION_LABELS.cloudy;
+      // console.log("here");
       break;
   }
 };

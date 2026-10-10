@@ -73,6 +73,3 @@ export default function renderSummaryCard({
 
   return summaryContent;
 }
-
-//!remember to change dataset to clasees since they arent storing values
-//!just naming for all of their type
