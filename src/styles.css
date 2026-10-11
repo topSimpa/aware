@@ -190,6 +190,13 @@ ul.contact > li {
     border-radius: 50%;
 }
 
+p.attribution {
+    display: flex;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.75rem;
+}
+
 h1,h2,h3,h4,h5,h6 {
     font-family: "Metamorphous";
 }

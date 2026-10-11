@@ -2,6 +2,9 @@
 Aware is a weather condition web dashboard that uses the [visual-crossing](https://www.visualcrossing.com/weather-api)
 API to display data about current weather conditions. Developed as part of [TOP](https://www.theodinproject.com) projects.
 
+## Preview
+[![aware.png]("./src/images/project/aware.png")]
+
 ## Features / Requirement
 - Dashboard showing current weather condition based on
   - user desired city
@@ -9,6 +12,9 @@ API to display data about current weather conditions. Developed as part of [TOP]
 - Forecast for:
   - The day
   - The week
+- Temperature unit changing:
+  - Celcius
+  - Kelvin
 - Interactive form for entering user location
 
 ## Objectives
