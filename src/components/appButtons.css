@@ -1,0 +1,26 @@
+div.app-unit-box {
+    background: var(--secondary-accent);
+    display: flex;
+    position: absolute;
+    gap: 0.5rem 0.75rem;
+    z-index: 1;
+    left: 40%;
+    bottom: 0.5rem;
+    padding: 0.5rem;
+    color: var(--secondary-background);
+    border-radius: 0.5rem;
+}
+
+div.app-unit-box label {
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
+    font-weight: 600;
+}
+
+input[name="app-unit"] {
+    accent-color: var(--accent);
+    padding: 0.5rem;
+    width: 1.25rem;
+    height: 1.25rem;
+}
