@@ -1,11 +1,11 @@
 //appHandler.js
 //handlers the UI changes and event handlings
 
-import { getLocation, getCity } from "../services/locationController.js";
-import getWeather from "../services/weatherController.js";
+import { getLocation, getCity } from "../services/locationService.js";
+import getWeather from "../services/weatherService.js";
 import { APP_UNIT_IDS } from "../config/constants.js";
 import renderAppUnitButton from "../components/appUnitButtons.js";
-import renderSummaryCard from "../components/currentSummaryCard.js";
+import renderSummaryCard from "../components/summaryCard.js";
 import renderAirConditon from "../components/airConditionCard.js";
 import renderTodayForecast from "../components/todaysForecastCard.js";
 import renderWeekForecast from "../components/weekForecastCard.js";
