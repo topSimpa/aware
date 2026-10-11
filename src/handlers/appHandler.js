@@ -4,10 +4,12 @@
 import { getLocation, getCity } from "../services/locationController.js";
 import getWeather from "../services/weatherController.js";
 import { APP_UNIT_IDS } from "../config/constants.js";
+import renderAppUnitButton from "../components/appUnitButtons.js";
 import renderSummaryCard from "../components/currentSummaryCard.js";
 import renderAirConditon from "../components/airConditionCard.js";
 import renderTodayForecast from "../components/todaysForecastCard.js";
 import renderWeekForecast from "../components/weekForecastCard.js";
+import { changeToCelcius, changeToFarenheit } from "../components/common.js";
 
 export default function appHandler({
   loadingModal,
@@ -17,6 +19,28 @@ export default function appHandler({
   weekForecastCard,
   formError,
 }) {
+  let selectedUnit = APP_UNIT_IDS.celcius;
+
+  const startUp = () => {
+    renderUI();
+    onUseLocation();
+  };
+
+  const selectUnit = (event) => {
+    const selectedButton = event.currentTarget;
+
+    switch (selectedButton.value) {
+      case APP_UNIT_IDS.celcius:
+        selectedUnit = APP_UNIT_IDS.celcius;
+        changeToCelcius();
+        break;
+      case APP_UNIT_IDS.fahrenheit:
+        selectedUnit = APP_UNIT_IDS.fahrenheit;
+
+        changeToFarenheit();
+    }
+  };
+
   const queryOption = {
     byLocation: 1,
     byCity: 2,
@@ -38,13 +62,11 @@ export default function appHandler({
     } else {
       loading();
       loadLocationData(queryOption.byCity, cityField.value)
-        .then((weatherData) => {
-          renderUI(weatherData);
-        })
+        .then(successLoad)
         .catch(loadingError)
         .finally(() => {
           cityForm.reset();
-          setTimeout(closeModal, 30);
+          closeModal();
         });
     }
   };
@@ -57,21 +79,15 @@ export default function appHandler({
     getLocation()
       .then((location) => {
         loading();
-        console.log(location);
+
         loadLocationData(queryOption.byLocation, location)
-          .then((weatherData) => {
-            renderUI(weatherData);
-            closeModal();
-          })
-          .catch(loadingError)
-          .finally(() => {
-            setTimeout(closeModal, 30);
-          });
+          .then(successLoad)
+          .catch(loadingError);
       })
       .catch(loadingError);
   };
 
-  const renderUI = (weatherData) => {
+  const renderUI = (weatherData, unit) => {
     if (!weatherData) {
       //for first loading state
       weatherData = {
@@ -83,20 +99,29 @@ export default function appHandler({
         week: [],
       };
     }
-    const summCard = renderSummaryCard(weatherData.current.summary);
-    const airCard = renderAirConditon(weatherData.current.airCondition);
-    const todaysCard = renderTodayForecast(weatherData.today);
-    const weekCard = renderWeekForecast(weatherData.week);
 
-    console.log(summCard);
-    console.log(airCard);
-    console.log(todaysCard);
-    console.log(weekCard);
+    const summCard = renderSummaryCard(weatherData.current.summary, unit);
+    const airCard = renderAirConditon(weatherData.current.airCondition);
+    const todaysCard = renderTodayForecast(weatherData.today, unit);
+    const weekCard = renderWeekForecast(weatherData.week);
+    const appUnitSelection = renderAppUnitButton(selectedUnit);
+    const appUnitButtons =
+      appUnitSelection.querySelectorAll(`input[type="radio"]`);
+
+    appUnitButtons.forEach((button) => {
+      button.addEventListener("change", selectUnit);
+    });
 
     summaryCard.replaceChildren(summCard);
+    summaryCard.append(appUnitSelection);
     airConditionsCard.replaceChildren(airCard);
     todaysForecastCard.replaceChildren(todaysCard);
     weekForecastCard.replaceChildren(weekCard);
+  };
+
+  const successLoad = (weatherData) => {
+    renderUI(weatherData, selectedUnit);
+    closeModal();
   };
 
   const loading = () => {
@@ -105,18 +130,23 @@ export default function appHandler({
   };
 
   const loadingError = (error) => {
+    loadingModal.textContent = error;
+    loadingModal.classList.add("error");
     if (!loadingModal.open) {
       loadingModal.showModal();
     }
-    loadingModal.textContent = error;
+    closeModal();
   };
 
   const closeModal = () => {
-    loadingModal.close();
+    setTimeout(() => {
+      loadingModal.close();
+      loadingModal.classList = "";
+    }, 3000);
   };
 
   async function loadLocationData(option, query) {
-    const getWeatherData = getWeather(APP_UNIT_IDS.celcius);
+    const getWeatherData = getWeather(selectedUnit);
     try {
       let weatherData;
       let city;
@@ -126,21 +156,20 @@ export default function appHandler({
           city = await getCity(query);
           break;
         case queryOption.byCity:
-          console.log("here for city");
           weatherData = await getWeatherData.byCity(query);
           city = query;
           break;
       }
-      console.log(weatherData);
+
       weatherData.current.summary.name = city;
       return Promise.resolve(weatherData);
     } catch (error) {
-      console.log(error);
       return Promise.reject(error);
     }
   }
 
-  renderUI();
+  //first start
+  startUp();
 
   return {
     clearError,

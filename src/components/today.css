@@ -20,7 +20,6 @@ li[data-today-forecast] img{
     width: 2rem;
 }
 
-li[data-today-forest] .temp {
-    font-size: 1.5rem;
+li[data-today-forecast] .value-box {
     font-weight: 600;
 }

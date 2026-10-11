@@ -7,8 +7,7 @@ ul.days {
 ul.days li[data-day] {
     flex: 1;
     display: flex;
-    padding: 1rem;
-    justify-content: space-between;
+    padding: 0.25rem;
     align-items: center;
     font-size: 0.9rem;
     font-weight: 200;
@@ -18,8 +17,14 @@ li[data-day] + li[data-day] {
     border-top: 1px solid var(--secondary-accent);
 }
 
+li[data-day] .day-of-week {
+    width: 6ch;
+}
+
 li[data-day] .condition-box {
+    flex: 1;
     display: flex;
+    justify-content: center;
     gap: 0.5rem;
     font-weight: 600;
     font-size: 1rem;

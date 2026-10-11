@@ -1,35 +1,48 @@
 //module to render air conditions ui
 import uvIcon from "../images/ui/uv.svg";
-import feelsIcon from "../images/ui/feels.svg";
 import windIcon from "../images/ui/wind.svg";
 import pressureIcon from "../images/ui/pressure.svg";
-import { assignSpeed, defaultValue } from "./common.js";
+import { defaultValue } from "./common.js";
 
 import "./aircon.css";
 
 export default function renderAirConditon({
-  unit,
   pressure = "",
-  feelsLike = "",
+  windDir = "",
   windSpeed = "",
   uvIndex = "",
 }) {
   const airMetrics = [
-    { key: "pressure", label: "pressure", icon: pressureIcon, value: pressure },
     {
-      key: "feelsLike",
-      label: "feels like",
-      icon: feelsIcon,
-      value: feelsLike,
+      key: "pressure",
+      label: "pressure",
+      icon: pressureIcon,
+      value: pressure,
+      unit: "mb",
+    },
+    {
+      key: "winddir",
+      label: "Wind direction",
+      icon: windIcon,
+      value: windDir,
+      unit: "°",
     },
     {
       key: "windSpeed",
       label: "wind",
       icon: windIcon,
       value: windSpeed,
+      unit: "mph",
     },
-    { key: "uvIndex", label: "UV index", icon: uvIcon, value: uvIndex },
+    {
+      key: "uvIndex",
+      label: "UV index",
+      icon: uvIcon,
+      value: uvIndex,
+      unit: "",
+    },
   ];
+
   const airMetricList = document.createElement("ul");
   airMetricList.classList.add("air-metrics");
 
@@ -39,7 +52,9 @@ export default function renderAirConditon({
     const metricText = document.createElement("div");
     const metricLabel = document.createElement("p");
     const metricIcon = document.createElement("img");
-    const metricValue = document.createElement("p");
+    const valueBox = document.createElement("p");
+    const metricValue = document.createElement("span");
+    const metricUnit = document.createElement("span");
 
     metricItem.dataset.metric = metric.key;
     metricIcon.src = metric.icon;
@@ -50,22 +65,12 @@ export default function renderAirConditon({
     metricLabel.textContent = metric.label;
 
     metricValue.classList.add("metric-value");
-    if (metric.key === "windSpeed") {
-      const metricUnit = document.createElement("span");
-      metricUnit.classList.add("metric-unit");
+    metricUnit.classList.add("metric-unit");
+    metricValue.textContent = metric.value || defaultValue;
+    metricUnit.textContent = metric.value ? metric.unit : "";
+    valueBox.append(metricValue, metricUnit);
 
-      assignSpeed({
-        speedElement: metricValue,
-        value: metric.value,
-        unitElement: metricUnit,
-        unit: unit,
-      });
-      metricValue.append(metricUnit);
-    } else {
-      console.log("metric is", metric.value);
-      metricValue.textContent = metric.value || defaultValue;
-    }
-    metricText.append(metricLabel, metricValue);
+    metricText.append(metricLabel, valueBox);
     metricItem.append(metricIcon, metricText);
 
     airMetricList.append(metricItem);

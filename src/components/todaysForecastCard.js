@@ -2,12 +2,10 @@ import { assignTemp, resolveWeatherIcon } from "./common.js";
 
 import "./today.css";
 
-export default function renderTodayForecast({
+export default function renderTodayForecast(
+  { morning = "", afternoon = "", evening = "" },
   unit,
-  morning = "",
-  afternoon = "",
-  evening = "",
-}) {
+) {
   const forecastTimes = [
     { time: "morning", label: "morning", value: morning },
     { time: "afternoon", label: "afternoon", value: afternoon },
@@ -20,8 +18,11 @@ export default function renderTodayForecast({
     const forecastItem = document.createElement("li");
     const forecastLabel = document.createElement("p");
     const forecastIcon = document.createElement("img");
-    const forecastTemp = document.createElement("p");
+    const valueBox = document.createElement("p");
+    const forecastTemp = document.createElement("span");
     const tempUnit = document.createElement("span");
+
+    valueBox.classList.add("value-box");
 
     forecastItem.dataset.todayForecast = time.time;
     forecastLabel.textContent = time.label;
@@ -33,8 +34,8 @@ export default function renderTodayForecast({
       unit: unit,
     });
 
-    forecastTemp.append(tempUnit);
-    forecastItem.append(forecastLabel, forecastIcon, forecastTemp);
+    valueBox.append(forecastTemp, tempUnit);
+    forecastItem.append(forecastLabel, forecastIcon, valueBox);
 
     forecastList.append(forecastItem);
   });

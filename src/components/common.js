@@ -1,7 +1,6 @@
 // module ecompases all the common functionality
 // of different component
 import { APP_UNIT_IDS, APP_CONDITIONS_IDS } from "../config/constants.js";
-import speedConv from "../utils/speedConverter.js";
 import tempConv from "../utils/tempConverter.js";
 
 const TEMP_UNIT = {
@@ -11,16 +10,12 @@ const TEMP_UNIT = {
 
 const defaultValue = "---";
 
-const SPEED_UNIT = {
-  miles: "mph",
-  kilometer: "km/h",
-};
-
 const CONDITION_LABELS = {
   rainy: "rainy",
   snowy: "snowy",
   foggy: "foggy",
   cloudy: "cloudy",
+  partialCloud: "partial-clouds",
   clearDay: "sunny",
   clearNight: "clear night",
   windy: "windy",
@@ -40,31 +35,19 @@ const CONDITION_ICONS = {
   windy: "",
 };
 
-const assignSpeed = ({ speedElement, value, unitElement, unit }) => {
-  speedElement.classList.add("speed");
-  unitElement.classList.add("speed-unit");
-
-  speedElement.textContent = value || defaultValue;
-
-  switch (unit) {
-    case APP_UNIT_IDS.celcius:
-      unitElement.textContent = SPEED_UNIT.kilometer;
-      break;
-    case APP_UNIT_IDS.fahrenheit:
-      unitElement.textContent = SPEED_UNIT.miles;
-      break;
-  }
-};
-
 const assignTemp = ({ tempElement, value, unitElement, unit }) => {
   unitElement.classList.add("temp-unit");
   tempElement.classList.add("temp");
 
   tempElement.textContent = value || defaultValue;
+  if (!value) {
+    return;
+  }
 
   switch (unit) {
     case APP_UNIT_IDS.celcius:
       unitElement.textContent = TEMP_UNIT.celcius;
+
       break;
     case APP_UNIT_IDS.fahrenheit:
       unitElement.textContent = TEMP_UNIT.fahrenheit;
@@ -97,11 +80,11 @@ const resolveCondition = (condition, element) => {
       element.textContent = CONDITION_LABELS.windy;
       break;
     case APP_CONDITIONS_IDS.cloudy:
+      element.textContent = CONDITION_LABELS.cloudy;
+      break;
     case APP_CONDITIONS_IDS.partlyCloudyDay:
     case APP_CONDITIONS_IDS.partlyCloudyNight:
-      element.textContent = CONDITION_LABELS.cloudy;
-      // console.log("here");
-      break;
+      element.textContent = CONDITION_LABELS.partialCloud;
   }
 };
 
@@ -139,8 +122,6 @@ const resolveWeatherIcon = (condition, element) => {
       weatherIcon = CONDITION_ICONS.partlyCloudyNight;
       break;
   }
-
-  console.log(weatherIcon);
   import(`../images/weather-icon/${weatherIcon}.svg`).then((icon) => {
     element.src = icon.default;
   });
@@ -149,39 +130,26 @@ const resolveWeatherIcon = (condition, element) => {
 const getQuantities = () => {
   const tempValueList = document.querySelectorAll(".temp");
   const tempUnitList = document.querySelectorAll(".temp-unit");
-  const speedUnitList = document.querySelectorAll(".speed-unit");
-  const speedValueList = document.querySelectorAll(".speed");
 
   return {
     tempValueList,
     tempUnitList,
-    speedUnitList,
-    speedValueList,
   };
 };
 
-const changeToAppUnit = ({
-  tempUnit,
-  tempConverter,
-  speedUnit,
-  speedConverter,
-}) => {
+const changeToAppUnit = ({ tempUnit, tempConverter }) => {
   const changingFields = getQuantities();
 
   changingFields.tempUnitList.forEach((unitField) => {
-    unitField.textContent = tempUnit;
+    if (unitField.textContent) {
+      unitField.textContent = tempUnit;
+    }
   });
 
   changingFields.tempValueList.forEach((valueField) => {
-    valueField.textContent = tempConverter(valueField.textContent);
-  });
-
-  changingFields.speedUnitList.forEach((unitField) => {
-    unitField.textContent = speedUnit;
-  });
-
-  changingFields.speedValueList.forEach((valueField) => {
-    valueField.textContent = speedConverter(valueField.textContent);
+    if (valueField.textContent !== defaultValue) {
+      valueField.textContent = tempConverter(valueField.textContent);
+    }
   });
 };
 
@@ -189,22 +157,17 @@ const changeToFarenheit = () =>
   changeToAppUnit({
     tempUnit: TEMP_UNIT.fahrenheit,
     tempConverter: tempConv.toFarenheit,
-    speedUnit: SPEED_UNIT.miles,
-    speedConverter: speedConv.toMilesPerHour,
   });
 
 const changeToCelcius = () =>
   changeToAppUnit({
     tempUnit: TEMP_UNIT.celcius,
     tempConverter: tempConv.toCelcius,
-    speedUnit: SPEED_UNIT.kilometer,
-    speedConverter: speedConv.toKmPerHour,
   });
 
 export {
   defaultValue,
   assignTemp,
-  assignSpeed,
   resolveCondition,
   resolveWeatherIcon,
   changeToCelcius,

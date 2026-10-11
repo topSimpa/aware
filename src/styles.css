@@ -34,6 +34,9 @@ dialog[open]::backdrop {
     backdrop-filter: blur(2px);
 }
 
+dialog.error {
+    color: var(--invalid);
+}
 
 header {
     display: flex;
@@ -95,6 +98,10 @@ form#city-form input:user-invalid {
     outline: 1px solid var(--invalid);
 }
 
+form#city-form input:focus-visible {
+    outline: 1px solid var(--accent);
+}
+
 header button#user-location {
     display: flex;
     gap: 0.5rem;
@@ -138,6 +145,8 @@ main section.current-content {
 
 
 section.current-content div.current-conditions {
+    position: relative;
+    z-index: 0;
     box-shadow: none;
     border: 1px solid var(--accent);
     background-image: url(./images/ui/light-background.jpg);

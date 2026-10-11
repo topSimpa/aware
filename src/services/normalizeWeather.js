@@ -47,7 +47,7 @@ export default function normalizeWeather(raw) {
       },
       airCondition: {
         windSpeed: `${cur.windspeed}`,
-        feelsLike: `${cur.feelslike}`,
+        windDir: `${cur.winddir}`,
         pressure: `${cur.pressure}`,
         uvIndex: `${cur.uvindex}`,
       },

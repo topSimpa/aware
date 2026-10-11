@@ -43,7 +43,6 @@ export default function getWeather(unit) {
 
     if (response.ok) {
       const locationData = await response.json();
-      console.log(locationData);
 
       //getappData
       const appData = normalizeWeather(locationData);
