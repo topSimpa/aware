@@ -3,7 +3,7 @@ Aware is a weather condition web dashboard that uses the [visual-crossing](https
 API to display data about current weather conditions. Developed as part of [TOP](https://www.theodinproject.com) projects.
 
 ## Preview
-[![aware.png]("./src/images/project/aware.png")]
+[aware.png]("./src/images/project/aware.png")
 
 ## Features / Requirement
 - Dashboard showing current weather condition based on
