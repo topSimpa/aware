@@ -1,0 +1,31 @@
+ 
+div.summary-content {
+    display: flex;
+    height: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+}
+div.summary-content div.summary-left {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+div.summary-top-left span.todays-date {
+    font-size: 0.9rem;
+}
+
+div.summary-bottom-left{
+    font-size: 2.5rem;
+    font-weight: 600;
+}
+
+div.summary-content img.weather-icon {
+    width: 8rem;
+}
+
+div.summary-content span.current-condition {
+    font-weight: 600;
+}

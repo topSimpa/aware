@@ -1,0 +1,21 @@
+ul.air-metrics {
+    flex: 1;
+    display: flex;
+    flex-flow: row wrap;
+    align-content: space-evenly;
+    justify-content: space-between;
+}
+
+ul.air-metrics li {
+    display: flex;
+    width: 50%;
+    align-items: flex-start;
+    gap: 0.25rem;
+    text-transform: capitalize;
+}
+
+ul.air-metrics .metric-value {
+    font-weight: 600;
+    font-size: 1.2rem;
+    padding: 0.25rem;
+}

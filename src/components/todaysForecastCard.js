@@ -1,5 +1,7 @@
 import { assignTemp, resolveWeatherIcon } from "./common.js";
 
+import "./today.css";
+
 export default function renderTodayForecast({
   unit,
   morning = "",

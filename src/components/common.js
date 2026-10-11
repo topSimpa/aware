@@ -44,7 +44,7 @@ const assignSpeed = ({ speedElement, value, unitElement, unit }) => {
   speedElement.classList.add("speed");
   unitElement.classList.add("speed-unit");
 
-  speedElement.textContent = value;
+  speedElement.textContent = value || defaultValue;
 
   switch (unit) {
     case APP_UNIT_IDS.celcius:

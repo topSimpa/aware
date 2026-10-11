@@ -1,0 +1,26 @@
+ul.today {
+    flex: 1;
+    display: flex;
+}
+
+ul.today li {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    text-transform: capitalize;
+}
+
+li[data-today-forecast] + li[data-today-forecast] {
+    border-left: 1px solid var(--secondary-accent);
+}
+
+li[data-today-forecast] img{
+    width: 2rem;
+}
+
+li[data-today-forest] .temp {
+    font-size: 1.5rem;
+    font-weight: 600;
+}

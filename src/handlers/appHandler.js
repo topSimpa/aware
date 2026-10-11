@@ -1,15 +1,27 @@
 //appHandler.js
 //handlers the UI changes and event handlings
 
-//todo: dynamic Import
-//? can i import dynamically and store as variable
+import { getLocation, getCity } from "../services/locationController.js";
+import getWeather from "../services/weatherController.js";
+import { APP_UNIT_IDS } from "../config/constants.js";
+import renderSummaryCard from "../components/currentSummaryCard.js";
+import renderAirConditon from "../components/airConditionCard.js";
+import renderTodayForecast from "../components/todaysForecastCard.js";
+import renderWeekForecast from "../components/weekForecastCard.js";
 
 export default function appHandler({
   loadingModal,
-  currentConditionsCard,
+  summaryCard,
   airConditionsCard,
   todaysForecastCard,
+  weekForecastCard,
+  formError,
 }) {
+  const queryOption = {
+    byLocation: 1,
+    byCity: 2,
+  };
+
   const onCityFieldSubmission = (event) => {
     //cityForm Handler
 
@@ -17,7 +29,6 @@ export default function appHandler({
 
     const cityForm = event.currentTarget;
     const cityField = cityForm.querySelector("input");
-    const formError = cityForm.querySelector("#form-error");
 
     formError.textContent = "";
 
@@ -26,17 +37,66 @@ export default function appHandler({
       cityField.focus();
     } else {
       loading();
+      loadLocationData(queryOption.byCity, cityField.value)
+        .then((weatherData) => {
+          renderUI(weatherData);
+        })
+        .catch(loadingError)
+        .finally(() => {
+          cityForm.reset();
+          setTimeout(closeModal, 30);
+        });
     }
+  };
 
-    //because error only shows up on first submission
-    //clear error
-    const clearError = () => {
-      formError.textContent = "";
-    };
-    // on input
-    cityField.addEventListener("input", clearError);
-    // on loose-focus
-    cityField.addEventListener("blur", clearError);
+  const clearError = () => {
+    formError.textContent = "";
+  };
+
+  const onUseLocation = () => {
+    getLocation()
+      .then((location) => {
+        loading();
+        console.log(location);
+        loadLocationData(queryOption.byLocation, location)
+          .then((weatherData) => {
+            renderUI(weatherData);
+            closeModal();
+          })
+          .catch(loadingError)
+          .finally(() => {
+            setTimeout(closeModal, 30);
+          });
+      })
+      .catch(loadingError);
+  };
+
+  const renderUI = (weatherData) => {
+    if (!weatherData) {
+      //for first loading state
+      weatherData = {
+        current: {
+          airCondition: {},
+          summary: {},
+        },
+        today: {},
+        week: [],
+      };
+    }
+    const summCard = renderSummaryCard(weatherData.current.summary);
+    const airCard = renderAirConditon(weatherData.current.airCondition);
+    const todaysCard = renderTodayForecast(weatherData.today);
+    const weekCard = renderWeekForecast(weatherData.week);
+
+    console.log(summCard);
+    console.log(airCard);
+    console.log(todaysCard);
+    console.log(weekCard);
+
+    summaryCard.replaceChildren(summCard);
+    airConditionsCard.replaceChildren(airCard);
+    todaysForecastCard.replaceChildren(todaysCard);
+    weekForecastCard.replaceChildren(weekCard);
   };
 
   const loading = () => {
@@ -44,78 +104,47 @@ export default function appHandler({
     loadingModal.showModal();
   };
 
+  const loadingError = (error) => {
+    if (!loadingModal.open) {
+      loadingModal.showModal();
+    }
+    loadingModal.textContent = error;
+  };
+
   const closeModal = () => {
     loadingModal.close();
   };
 
-  const changeCity = (name) => {
-    //responsible for changing city's name
-    const city = currentConditionsCard.querySelector("city");
-    city.textContent = name;
-  };
+  async function loadLocationData(option, query) {
+    const getWeatherData = getWeather(APP_UNIT_IDS.celcius);
+    try {
+      let weatherData;
+      let city;
+      switch (option) {
+        case queryOption.byLocation:
+          weatherData = await getWeatherData.byLocation(query);
+          city = await getCity(query);
+          break;
+        case queryOption.byCity:
+          console.log("here for city");
+          weatherData = await getWeatherData.byCity(query);
+          city = query;
+          break;
+      }
+      console.log(weatherData);
+      weatherData.current.summary.name = city;
+      return Promise.resolve(weatherData);
+    } catch (error) {
+      console.log(error);
+      return Promise.reject(error);
+    }
+  }
 
-  const changeCurrentCondition = ({ temperature, icon }) => {
-    //handles ui-changes for current conditions
-    const tempUI = currentConditionsCard.querySelector("#temp");
-    const summary = currentConditionsCard.querySelector("#summary");
-    const weatherIcon = currentConditionsCard.querySelector("#weather-icon");
-
-    tempUI.textContent = temperature;
-    summary.textContent = icon;
-
-    import(`../images/${icon}.svg`).then((module) => {
-      weatherIcon.src = module.default;
-    });
-  };
-
-  const changeAirCondition = ({ windSpeed, feelsLike, pressure, uv }) => {
-    const windSpeedUI = airConditionsCard.querySelector("#windspeed");
-    const feelsLikeUI = airConditionsCard.querySelector("#feels-like");
-    const pressureUI = airConditionsCard.querySelector("#pressure");
-    const uvIndex = airConditionsCard.querySelector("#uv-index");
-
-    //changing only UI values
-    const changeValue = (ui, val) => {
-      const uiValue = ui.querySelector(".element-value");
-      uiValue.textContent = val;
-    };
-
-    changeValue(windSpeedUI, windSpeed);
-    changeValue(feelsLikeUI, feelsLike);
-    changeValue(pressure, pressureUI);
-    changeValue(uvIndex);
-  };
-
-  changetodayForecast = ({ morning, afternoon, evening }) => {
-    const morningUI = todaysForecastCard.querySelector("#morning");
-    const afternoonUI = todaysForecastCard.querySelector("#afternoon");
-    const eveningUI = todaysForecastCard.querySelector("#evening");
-
-    const changeContent = (ui, content) => {
-      const icon = ui.querySelector(".icon");
-      const temperature = ui.querySelector(".temp");
-
-      icon.src = content.icon;
-      temperature.textContent = content.temperature;
-    };
-
-    const changeWeekForecast = (days) => {};
-
-    changeContent(morningUI, morning);
-    changeContent(afternoonUI, afternoon);
-    changeContent(eveningUI, evening);
-  };
+  renderUI();
 
   return {
+    clearError,
     onCityFieldSubmission,
+    onUseLocation,
   };
 }
-
-//*Parts to handle
-//? location-form
-
-//? current-condition
-//? air-condition
-//? todays-forecast
-//? week-forecast
-//todo: add celcius to degree functionality

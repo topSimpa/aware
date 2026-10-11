@@ -71,7 +71,7 @@ export default function getWeather(unit) {
   const byCity = async (city) => {
     try {
       const appData = makeFetch(city);
-      Promise.resolve(appData);
+      return Promise.resolve(appData);
     } catch (error) {
       return Promise.reject(error);
     }

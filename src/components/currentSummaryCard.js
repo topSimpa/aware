@@ -1,5 +1,6 @@
 //ui module for the currentCondition summary
 // Card
+import "./summary.css";
 import { format } from "date-fns";
 
 import {

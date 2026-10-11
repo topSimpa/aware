@@ -5,6 +5,8 @@ import windIcon from "../images/ui/wind.svg";
 import pressureIcon from "../images/ui/pressure.svg";
 import { assignSpeed, defaultValue } from "./common.js";
 
+import "./aircon.css";
+
 export default function renderAirConditon({
   unit,
   pressure = "",
@@ -26,7 +28,7 @@ export default function renderAirConditon({
       icon: windIcon,
       value: windSpeed,
     },
-    { key: "uvIndex", label: "uv index", icon: uvIcon, value: uvIndex },
+    { key: "uvIndex", label: "UV index", icon: uvIcon, value: uvIndex },
   ];
   const airMetricList = document.createElement("ul");
   airMetricList.classList.add("air-metrics");
@@ -60,6 +62,7 @@ export default function renderAirConditon({
       });
       metricValue.append(metricUnit);
     } else {
+      console.log("metric is", metric.value);
       metricValue.textContent = metric.value || defaultValue;
     }
     metricText.append(metricLabel, metricValue);

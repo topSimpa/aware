@@ -130,135 +130,42 @@ main {
     gap: 1rem;
 }
 
-main section.todays-content {
+main section.current-content {
     display: grid;
     grid-template-rows: 3fr 2fr 2fr;
     gap: 1.5rem;
 }
 
 
-section.todays-content div.current-conditions {
+section.current-content div.current-conditions {
     box-shadow: none;
     border: 1px solid var(--accent);
     background-image: url(./images/ui/light-background.jpg);
     background-position: center;
 }
 
-div.current-conditions div.content {
+div.current-conditions div#summary-card {
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(12px) saturate(160%);
-    display: flex;
     height: 100%;
-    justify-content: space-between;
-    align-items: center;
-    paddIng: 0.5rem;
-}
-
-div.content div.left {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-div.top span#todays-date {
-    font-size: 0.9rem;
-}
-
-div.left div.bottom {
-    font-size: 2.5rem;
-    font-weight: 600;
-}
-
-div.content img#weather-icon {
-    width: 8rem;
-}
-
-div.content span#summary {
-    font-weight: 600;
 }
 
 section.todays-content div.air-conditions {
     padding-right: 3rem;
 }
 
-div.air-conditions div.elements {
-    flex: 1;
-    display: flex;
-    justify-content: space-between;
-}
-
-div.elements ul.element-list {
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 2rem;
-    justify-content: space-between;
-}
-
-ul.element-list li {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.25rem;
-}
-
-ul.element-list .element-value {
-    font-size: 1.5rem;
-    font-weight: 600;
-}
-
-div.forecast-today ul.today{
-    flex: 1;
-    display: flex;
-}
-
-ul.today li {
+div.air-conditions div#air-condition-card,
+div.forecast-today div#todays-forecast-card,
+div.forecast-week div#week-forecast-card{
     flex: 1;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
 }
 
-li.time + li.time {
-    border-left: 1px solid var(--secondary-accent);
-}
-
-li.time img{
-    width: 2rem;
-}
-
-li.time .temp {
-    font-size: 1.5rem;
-    font-weight: 600;
-}
 
 main section.week-content {
     display: grid;
     grid-template-rows: 1fr auto;
-}
-
-div.forecast-week ul.days {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-ul.days li.day-summary {
-    flex: 1;
-    display: flex;
-    padding: 1rem;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.9rem;
-}
-
-li.day-summary + li.day-summary {
-    border-top: 1px solid var(--secondary-accent);
-}
-
-li.day-summary .condition {
-    font-weight: 600;
-    font-size: 1rem;
 }
 
 section.week-content ul.contact {

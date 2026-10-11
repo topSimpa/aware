@@ -7,7 +7,7 @@
     <title>Aware</title>
   </head>
   <body>
-    <dialog class="loading-component"></dialog>
+    <dialog id="loading-component"></dialog>
     <header>
       <section class="brand-content">
         <img id="logo" src="./images/ui/logo.svg" alt="logo" />
@@ -16,7 +16,12 @@
       <section class="search-content">
         <form id="city-form" novalidate>
           <div class="inputbox">
-            <input name="city" placeholder="Enter a city" required />
+            <input
+              id="city-input"
+              name="city"
+              placeholder="Enter a city"
+              required
+            />
             <span id="form-error"></span>
           </div>
           <button id="submit" type="submit">Get Weather</button>
@@ -28,128 +33,23 @@
       </button>
     </header>
     <main>
-      <section class="todays-content">
+      <section class="current-content">
         <div class="cards current-conditions">
-          <div class="content">
-            <div class="left">
-              <div class="top">
-                <h2 id="city">City</h2>
-                <span class="caption" id="todays-date"
-                  >Thursday, October 05, 2026</span
-                >
-              </div>
-              <div class="bottom">
-                <span id="temp">30</span><span id="unit">&#8451;</span>
-              </div>
-            </div>
-            <div class="right">
-              <span class="caption" id="summary">Rainy</span>
-              <img
-                id="weather-icon"
-                src="./images/weather-icon/rain.svg"
-                alt="sunny"
-              />
-            </div>
-          </div>
+          <div id="summary-card"></div>
         </div>
         <div class="cards two-column air-conditions">
           <h5>AIR CONDITIONS</h5>
-          <div class="elements">
-            <ul class="element-list">
-              <li id="windspeed">
-                <img src="./images/ui/wind.svg" alt="logo-wind" />
-                <div>
-                  <p class="element-name">Wind</p>
-                  <p class="element-value">123</p>
-                </div>
-              </li>
-              <li id="feels-like">
-                <img src="./images/ui/feels.svg" alt="logo-feels" />
-                <div>
-                  <p class="element-name">Feels like</p>
-                  <p class="element-value"></p>
-                </div>
-              </li>
-            </ul>
-            <ul class="element-list">
-              <li id="pressure">
-                <img src="./images/ui/pressure.svg" alt="logo-pressure" />
-                <div>
-                  <p class="element-name">Pressure</p>
-                  <p class="element-value"></p>
-                </div>
-              </li>
-              <li id="uv-index">
-                <img src="./images/ui/uv.svg" alt="" />
-                <div>
-                  <p class="element-name">UV index</p>
-                  <p class="element-value"></p>
-                </div>
-              </li>
-            </ul>
-          </div>
+          <div id="air-condition-card"></div>
         </div>
         <div class="cards two-column forecast-today">
           <h5>TODAY'S FORECAST</h5>
-          <ul class="today">
-            <li class="time" id="morning">
-              <p>Morning</p>
-              <img class="icon" src="./images/weather-icon/cloud.svg" />
-              <p class="temp">20</p>
-            </li>
-            <li class="time" id="afternoon">
-              <p>Afternoon</p>
-              <img class="icon" src="./images/weather-icon/cloud.svg" />
-              <p class="temp">10</p>
-            </li>
-            <li class="time" id="evening">
-              <p>Evening</p>
-              <img class="icon" src="./images/weather-icon/cloud.svg" />
-              <p class="temp">30</p>
-            </li>
-          </ul>
+          <div id="todays-forecast-card"></div>
         </div>
       </section>
       <section class="cards week-content">
         <div class="two-column forecast-week">
-          <h5>7-DAY FORECAST</h5>
-          <ul class="days">
-            <li class="day-summary">
-              <p class="day"></p>
-              <p class="condition"></p>
-              <p class="date"></p>
-            </li>
-            <li class="day-summary">
-              <p class="day"></p>
-              <p class="condition"></p>
-              <p class="date"></p>
-            </li>
-            <li class="day-summary">
-              <p class="day"></p>
-              <p class="condition"></p>
-              <p class="date"></p>
-            </li>
-            <li class="day-summary">
-              <p class="day"></p>
-              <p class="condition"></p>
-              <p class="date"></p>
-            </li>
-            <li class="day-summary">
-              <p class="day">Fri</p>
-              <p class="condition"><img />Sunny</p>
-              <p class="date">9/08/26</p>
-            </li>
-            <li class="day-summary">
-              <p class="day"></p>
-              <p class="condition"></p>
-              <p class="date"></p>
-            </li>
-            <li class="day-summary">
-              <p class="day"></p>
-              <p class="condition"></p>
-              <p class="date"></p>
-            </li>
-          </ul>
+          <h5>NEXT 7-DAYS FORECAST</h5>
+          <div id="week-forecast-card"></div>
         </div>
         <ul class="contact">
           <li class="github">

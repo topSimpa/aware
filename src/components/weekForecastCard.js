@@ -1,6 +1,8 @@
 import { resolveCondition, resolveWeatherIcon } from "./common.js";
 import { isToday, format } from "date-fns";
 
+import "./week.css";
+
 export default function renderWeekForecast(listOfdaysForecast) {
   const daysForecastList = document.createElement("ul");
   daysForecastList.classList.add("days");

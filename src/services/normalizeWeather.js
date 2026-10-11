@@ -42,14 +42,14 @@ export default function normalizeWeather(raw) {
   const appData = {
     current: {
       summary: {
-        temperature: cur.temp,
+        temperature: `${cur.temp}`,
         condition: matchConditions(cur.icon),
       },
       airCondition: {
-        windSpeed: cur.windspeed,
-        feelsLike: cur.feelslike,
-        pressure: cur.pressure,
-        uvIndex: cur.uvindex,
+        windSpeed: `${cur.windspeed}`,
+        feelsLike: `${cur.feelslike}`,
+        pressure: `${cur.pressure}`,
+        uvIndex: `${cur.uvindex}`,
       },
     },
 
@@ -59,7 +59,7 @@ export default function normalizeWeather(raw) {
       Object.entries(HOUR).map(([label, time]) => {
         const hour = pickHour(time);
         const details = {
-          temperature: hour.temp,
+          temperature: `${hour.temp}`,
           condition: matchConditions(hour.icon),
         };
 
